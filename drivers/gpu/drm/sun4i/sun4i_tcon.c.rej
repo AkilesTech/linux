@@ -1,0 +1,11 @@
+--- drivers/gpu/drm/sun4i/sun4i_tcon.c
++++ drivers/gpu/drm/sun4i/sun4i_tcon.c
+@@ -492,6 +492,8 @@ static void sun4i_tcon0_mode_set_rgb(struct sun4i_tcon *tcon,
+ 	/* Set dithering if needed */
+ 	if (tcon->panel)
+ 		sun4i_tcon0_mode_set_dithering(tcon, tcon->panel->connector);
++	else
++		sun4i_tcon0_mode_set_dithering(tcon, NULL);
+ 
+ 	/* Adjust clock delay */
+ 	clk_delay = sun4i_tcon_get_clk_delay(mode, 0);

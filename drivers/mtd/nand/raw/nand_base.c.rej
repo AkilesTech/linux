@@ -1,0 +1,20 @@
+--- drivers/mtd/nand/raw/nand_base.c
++++ drivers/mtd/nand/raw/nand_base.c
+@@ -4249,16 +4246,7 @@ static int nand_block_isbad(struct mtd_info *mtd, loff_t offs)
+ 	int chipnr = (int)(offs >> chip->chip_shift);
+ 	int ret;
+ 
+-	/* Select the NAND device */
+-	nand_get_device(mtd, FL_READING);
+-	chip->select_chip(chip, chipnr);
+-
+-	ret = nand_block_checkbad(mtd, offs, 0);
+-
+-	chip->select_chip(chip, -1);
+-	nand_release_device(mtd);
+-
+-	return ret;
++	return 0;
+ }
+ 
+ /**

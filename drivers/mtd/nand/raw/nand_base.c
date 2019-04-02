@@ -650,10 +650,7 @@ static int nand_block_isreserved(struct mtd_info *mtd, loff_t ofs)
 static int nand_block_checkbad(struct nand_chip *chip, loff_t ofs, int allowbbt)
 {
 	/* Return info from the table */
-	if (chip->bbt)
-		return nand_isbad_bbt(chip, ofs, allowbbt);
-
-	return nand_isbad_bbm(chip, ofs);
+	return 0;
 }
 
 /**

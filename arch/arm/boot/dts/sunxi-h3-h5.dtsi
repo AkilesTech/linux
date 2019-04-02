@@ -342,6 +342,11 @@
 			status = "disabled";
 		};
 
+		sid: eeprom@01c14000 {
+			compatible = "allwinner,sun8i-h3-sid";
+			reg = <0x01c14000 0x400>;
+		};
+
 		usbphy: phy@1c19400 {
 			compatible = "allwinner,sun8i-h3-usb-phy";
 			reg = <0x01c19400 0x2c>,
@@ -513,6 +518,16 @@
 				function = "i2c2";
 			};
 
+			i2s0_pins: i2s0 {
+				pins = "PA18", "PA19", "PA20", "PA21";
+				function = "i2s0";
+			};
+
+			i2s1_pins: i2s1 {
+				pins = "PG10", "PG11", "PG12", "PG13";
+				function = "i2s1";
+			};
+
 			mmc0_pins: mmc0 {
 				pins = "PF0", "PF1", "PF2", "PF3",
 				       "PF4", "PF5";
@@ -574,6 +589,11 @@
 				function = "uart2";
 			};
 
+			uart2_rts_cts_pins: uart2_rts_cts {
+				pins = "PA2", "PA3";
+				function = "uart2";
+			};
+
 			uart3_pins: uart3 {
 				pins = "PA13", "PA14";
 				function = "uart3";
@@ -585,17 +605,13 @@
 			};
 		};
 
-		ths: ths@1c25000 {
-			#thermal-sensor-cells = <0>;
-			compatible = "allwinner,sun8i-h3-ths";
-			reg = <0x01c25000 0x400>,
-			      <0x01c14234 0x4>;
-			reg-names = "ths", "calibration";
+		ths: thermal-sensor@1c25000 {
+			reg = <0x01c25000 0x100>;
 			interrupts = <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>;
-			resets = <&ccu RST_BUS_THS>;
-			reset-names = "ahb";
 			clocks = <&ccu CLK_BUS_THS>, <&ccu CLK_THS>;
-			clock-names = "ahb", "ths";
+			clock-names = "bus", "mod";
+			resets = <&ccu RST_BUS_THS>;
+			#io-channel-cells = <0>;
 		};
 
 		timer@1c20c00 {
